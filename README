@@ -1,0 +1,26 @@
+Basic README for puppet samba module
+
+Allow you to setup Samba service
+
+Test in this directory by running [sudo] ./test/run.sh [noop|reallyrun]
+
+- To install samba client:
+include "samba"
+
+- To install samba server:
+include "samba::server"
+
+- To configure samba service using a local config file:
+samba::server::config { "default": source=> "puppet:///modules/MYMODULE/my_samba_conf; }  
+
+- To configure samba service using a local template file:
+samba::config { "default": content=> $mycontent }  
+
+### Example
+
+	$samba_shares = get_var("nasbox","samba.shares")
+	samba::server::config { smb: 
+		content => template("mymodule/samba/smb.conf.erb"),
+	}
+
+####
